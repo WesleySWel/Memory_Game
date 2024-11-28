@@ -1,0 +1,97 @@
+@import url(./reset.css);
+
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #fc1e8a;
+    user-select: none; /* retira a representação do mouse como se fosse para selecionar e escrever algo*/
+}
+
+.container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; /* espaçamento de 30px entre os blocos de cartas*/
+ /* css gradient generator é um site que possui ferramentas para criação de gradientes*/
+    background: linear-gradient(
+        325deg,  
+        #03001e 0%,
+        #7303c0 30%,
+        #ec38bc 70%,
+        #fdeff9 100%
+    );
+    padding: 40px 60px;
+}
+
+h2{
+    color:#fff;
+    font-size: 3em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.reset{
+    padding: 15px 20px;
+    width: 100%;
+    color: #000;
+    background-color: #fff;
+    border:none;
+    font-size: 1.5em;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer; /* ficará com o ponteiro diferente quando passar pelo botão */
+    font-weight: 600;
+}
+
+.reset:focus { /* o dois pontos cria uma pseudo-class, fazendo com que possa selecionar algo que n poderia ser adquirido de outro forma, por ser uma classe ela só poderá ser selacionada assim*/
+    color:#ec38bc;
+    background-color: #262808;
+}
+
+.game{
+    width: 430px;
+    height: 430px;
+    display: flex;
+    flex-wrap: wrap; /* quebra de linha automática quando elemento chegar a ultrapassar a div*/
+    gap: 10px;
+    transform-style: preserve-3d; /* preservar animação de movimentação */
+    perspective: 500px;
+}
+
+.item{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    font-size: 2.3em;
+    transform: rotateY(180deg); /* faz as cartas rodarem no eixo y como animação */
+    transition: 0.25s; /* tempo para rotação */
+}
+
+.item::after{ /* :: serve para criar pseudo-elementos, criando sobreposições ou customizações em um elemento já existente, por isso o after, será aplicado após o processamento das cartas */
+    content: "";
+    position: absolute;
+    inset: 0; /* esse pseudo-elemento ficará na posição 0 (em cima do elemento principal) para tapar o conteúdo*/
+    background-color: #271547;
+    transform: rotateY(0deg);
+    transition: 0.25s;
+    backface-visibility: hidden; /*esconde o elemento principal que está atrás*/
+
+}
+
+.item .boxOpen{
+    transform: rotateY(0deg);
+}
+
+.boxOpen::after,
+.boxMatch::after{
+    transform: rotateY(180deg);
+}
